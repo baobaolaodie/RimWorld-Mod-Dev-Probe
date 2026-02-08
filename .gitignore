@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.lock.json
+# Rider
+.idea/
+*.sln.iml
