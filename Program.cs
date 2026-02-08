@@ -12,16 +12,25 @@ namespace RimWorldApiProbe
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Running Automated Probe...");
+            Console.WriteLine("Initializing RimWorld API Probe...");
             LoadAssemblies();
 
-            Console.WriteLine("\n--- Inspecting ThingComp for Gizmo methods ---");
-            InspectMethods("ThingComp");
+            Console.WriteLine("\nRimWorld API Probe Ready.");
+            Console.WriteLine("Type 'exit' or 'quit' to close.");
+            Console.WriteLine("Enter a class name (e.g., 'Pawn', 'Tile') to search.");
 
-            Console.WriteLine("\n--- Inspecting Apparel for Gizmo methods ---");
-            InspectMethods("Apparel");
+            while (true)
+            {
+                Console.Write("\n> ");
+                string input = Console.ReadLine();
 
-            Console.WriteLine("\n--- Done ---");
+                if (string.IsNullOrWhiteSpace(input)) continue;
+                if (input.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) || 
+                    input.Trim().Equals("quit", StringComparison.OrdinalIgnoreCase))
+                    break;
+
+                SearchAndInspect(input.Trim());
+            }
         }
 
         static void InspectMethods(string typeName)
@@ -166,7 +175,7 @@ namespace RimWorldApiProbe
             {
                 try
                 {
-                    var types = asm.GetTypes().Where(t => t.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                    var types = GetTypesSafe(asm).Where(t => t.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
                     foundTypes.AddRange(types);
                 }
                 catch { }
