@@ -100,6 +100,9 @@ dotnet run
 
 ## 使用指南
 
+对于初学者：[RimWorld Mod 开发新手指南](GETTING_STARTED.md)
+
+
 ### 命令总览
 
 #### 模式切换命令
